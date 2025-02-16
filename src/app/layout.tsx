@@ -3,7 +3,7 @@ import { Jura, Geist } from "next/font/google";
 import "./globals.css";
 
 const jura = Jura({
-  variable: "--font-jura", // Define a variável CSS para a fonte
+  variable: "--font-jura",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -14,8 +14,29 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Portfólio Víctor Santucci",
-  description: "O meu portfólio online",
+  title: "Portfólio de Víctor Santucci",
+  description: "Conheça um pouco mais da minha experiência profissional como um desenvolvedor full stack web.",
+  openGraph: {
+    images: [
+      {
+        url: "/victorsantucci.png", 
+        width: 1200, 
+        height: 630, 
+        alt: "Victor Santucci's Portfolio",
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      {
+        url: "/victorsantucci.png", 
+        width: 1200, 
+        height: 630,
+        alt: "Victor Santucci's Portfolio",
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
