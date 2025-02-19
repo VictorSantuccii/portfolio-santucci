@@ -12,7 +12,4 @@ body {
   font-family: var(--font-primary), sans-serif;
 }
 
-h1, h2, h3, p, span {
-  font-family: var(--font-primary), sans-serif; /* Garantindo que as fontes sejam aplicadas em todas as tags de texto */
-}
 

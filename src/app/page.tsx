@@ -1,67 +1,74 @@
 "use client";
-
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { useState } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
-import { motion } from "framer-motion";
+import { FiMenu, FiX, FiUser, FiCode, FiFolder, FiMail, FiTool, FiZap, FiUsers, FiMapPin, FiMessageCircle } from 'react-icons/fi';
+import { motion, AnimatePresence } from "framer-motion";
 import { FaJs, FaNodeJs, FaReact, FaDocker, FaGitAlt } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiNestjs, SiPostgresql, SiPrisma, SiSequelize } from "react-icons/si";
+import { SiTypescript, SiNextdotjs, SiNestjs, SiPostgresql, SiPrisma, SiSequelize, SiTypeorm, SiMysql, SiMongodb, SiAndroid, SiTailwindcss } from "react-icons/si";
 import { AiFillInstagram, AiFillLinkedin, AiFillGithub, AiFillWechat } from "react-icons/ai";
+import { useState, useEffect } from 'react';
 
-// Lista de projetos
-const projects = [
-  { title: "Projeto 1", description: "Descrição do projeto 1." },
-  { title: "Projeto 2", description: "Descrição do projeto 2." },
-  { title: "Projeto 3", description: "Descrição do projeto 3." },
-];
-
-// Lista de habilidades com ícones
 const skills = [
-  { name: "JavaScript", icon: <FaJs />, color: "white" },
-  { name: "TypeScript", icon: <SiTypescript />, color: "white" },
-  { name: "Node.js", icon: <FaNodeJs />, color: "white" },
-  { name: "React", icon: <FaReact />, color: "white" },
-  { name: "Next.js", icon: <SiNextdotjs />, color: "white" },
-  { name: "Tailwind CSS", icon: <div className="bg-white text-black p-2 rounded">T</div>, color: "black" }, // Cor do hover ajustada
-  { name: "NestJS", icon: <SiNestjs />, color: "white" },
-  { name: "PostgreSQL", icon: <SiPostgresql />, color: "white" },
-  { name: "Docker", icon: <FaDocker />, color: "white" },
-  { name: "Git", icon: <FaGitAlt />, color: "white" },
-  { name: "Prisma", icon: <SiPrisma />, color: "white" },
-  { name: "Sequelize", icon: <SiSequelize />, color: "white" },
+  { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
+  { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
+  { name: "Node.js", icon: <FaNodeJs />, color: "#68A063" },
+  { name: "React", icon: <FaReact />, color: "#61DAFB" },
+  { name: "Next.js", icon: <SiNextdotjs />, color: "#F4EBD9" },
+  { name: "NestJS", icon: <SiNestjs />, color: "#E0234E" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
+  { name: "Docker", icon: <FaDocker />, color: "#2496ED" },
+  { name: "Git", icon: <FaGitAlt />, color: "#F05032" },
+  { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#10A7F9" },
+  { name: "Prisma", icon: <SiPrisma />, color: "#05F08A" },
+  { name: "Sequelize", icon: <SiSequelize />, color: "#52B0E7" },
+  { name: "TypeORM", icon: <SiTypeorm />, color: "#FE2C2C" },
+  { name: "MySQL", icon: <SiMysql />, color: "#4479A1" },
+  { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
+  { name: "React Native", icon: <SiAndroid />, color: "#3DDC84" },
 ];
 
-export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  export default function Home() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-    e.target.reset(); 
-  };
+    const handleSubmit = (e:any) => {
+      e.preventDefault();
+      e.target.reset(); 
+    };
 
+  const titles = ["Desenvolvedor de Software Full Stack", "Franca - São Paulo | Brasil "];
+  const [currentTitle, setCurrentTitle] = useState(titles[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitle((prev) => 
+        prev === titles[0] ? titles[1] : titles[0]
+      );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#000000] text-white">
       {/* Navbar */}
       <motion.nav
-  className="flex font-jura justify-between items-center p-6 bg-[#0000006f] fixed top-0 left-0 right-0 z-50 shadow-lg backdrop-blur-md"
+  className="flex font-geist-mono justify-between items-center p-6 fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a] "
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ duration: 0.5 }}
 >
+  {/* Logo */}
   <motion.div
-    className="flex items-center space-x-2 text-3xl font-bold font-jura text-white"
+    className="flex items-center space-x-2 text-2xl font-bold font-jura text-white"
     initial={{ opacity: 0, x: -50 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6 }}
   >
-    {/* Efeito de digitação no nome */}
     <div className="relative group">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex"
       >
+
+        
         {"Víctor Santucci".split("").map((letter, index) => (
           <motion.span
             key={index}
@@ -74,17 +81,11 @@ export default function Home() {
             className="relative bg-gradient-to-r from-[#1DB954] to-cyan-400 bg-clip-text text-transparent"
           >
             {letter}
-            {/* Efeito de brilho nas letras */}
-           
           </motion.span>
         ))}
       </motion.div>
-      
-      {/* Efeito de borda animada */}
       <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#1DB954] to-cyan-400 group-hover:w-full transition-all duration-500" />
     </div>
-
-    {/* Tag de fechamento animada */}
     <motion.span
       className="text-xl ml-2"
       initial={{ opacity: 0, scale: 0.5 }}
@@ -100,40 +101,41 @@ export default function Home() {
     </motion.span>
   </motion.div>
 
-
-  {/* Menu Desktop (oculto em mobile) */}
-  <div className="hidden lg:flex space-x-8 text-lg">
-    {['#sobre', '#skills', '#projects', '#contact'].map((link, index) => (
+  {/* Menu Desktop */}
+  <div className="hidden lg:flex space-x-10 text-base">
+    {[
+      { link: '#sobre', icon: <FiUser />, text: 'Sobre' },
+      { link: '#skills', icon: <FiCode />, text: 'Habilidades' },
+      { link: '#projects', icon: <FiFolder />, text: 'Projetos' },
+      { link: '#contact', icon: <FiMail />, text: 'Contato' }
+    ].map((item, index) => (
       <motion.a
         key={index}
-        href={link}
-        className="relative px-4 py-2 group"
+        href={item.link}
+        className="relative px-4 py-2 group flex items-center space-x-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 + index * 0.1 }}
         onClick={(e) => {
           e.preventDefault();
-          document.querySelector(link)?.scrollIntoView({ behavior: "smooth" });
+          document.querySelector(item.link)?.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <span className="relative z-10">
-          {(() => {
-            switch(link) {
-              case '#sobre': return 'Sobre';
-              case '#skills': return 'Habilidades';
-              case '#projects': return 'Projetos';
-              case '#contact': return 'Contato';
-            }
-          })()}
+        {/* Ícone */}
+        <motion.div
+          className="text-[#1DB954] group-hover:text-white transition-colors duration-300"
+          whileHover={{ rotate: 360, scale: 1.2 }}
+        >
+          {item.icon}
+        </motion.div>
+
+        {/* Texto */}
+        <span className="relative z-10 text-white group-hover:text-[#1DB954] transition-colors">
+          {item.text}
         </span>
         
-        {/* Efeito Hover High-Tech */}
-        <div className="absolute inset-0 overflow-hidden rounded-lg">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,#1DB954_50%,transparent_75%)] bg-[length:400%_400%] opacity-0 group-hover:opacity-100 group-hover:animate-shine" />
-        </div>
-        
-        {/* Borda animada */}
-        <div className="absolute inset-0 border border-[#1DB954] rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300" />
+        {/* Efeito Hover Futurista */}
+        <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#1DB954] to-cyan-400 group-hover:w-full transition-all duration-500" />
       </motion.a>
     ))}
   </div>
@@ -149,8 +151,6 @@ export default function Home() {
       ) : (
         <FiMenu className="text-white" />
       )}
-      
-      {/* Efeito de pulsação */}
       <div className="absolute inset-0 rounded-full bg-[#1DB954] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
     </button>
 
@@ -164,29 +164,36 @@ export default function Home() {
       >
         <div className="absolute right-6 top-20">
           <div className="flex flex-col items-end space-y-6 text-xl">
-            {['#sobre', '#skills', '#projects', '#contact'].map((link, index) => (
+            {[
+              { link: '#sobre', icon: <FiUser />, text: 'Sobre' },
+              { link: '#skills', icon: <FiCode />, text: 'Habilidades' },
+              { link: '#projects', icon: <FiFolder />, text: 'Projetos' },
+              { link: '#contact', icon: <FiMail />, text: 'Contato' }
+            ].map((item, index) => (
               <motion.a
                 key={index}
-                href={link}
-                className="relative px-4 py-2 group"
+                href={item.link}
+                className="relative px-4 py-2 group flex items-center space-x-2"
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector(link)?.scrollIntoView({ behavior: "smooth" });
+                  document.querySelector(item.link)?.scrollIntoView({ behavior: "smooth" });
                   setIsMenuOpen(false);
                 }}
               >
+                {/* Ícone */}
+                <motion.div
+                  className="text-[#1DB954] group-hover:text-white transition-colors duration-300"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                >
+                  {item.icon}
+                </motion.div>
+
+                {/* Texto */}
                 <span className="text-white group-hover:text-[#1DB954] transition-colors">
-                  {(() => {
-                    switch(link) {
-                      case '#sobre': return 'Sobre';
-                      case '#skills': return 'Habilidades';
-                      case '#projects': return 'Projetos';
-                      case '#contact': return 'Contato';
-                    }
-                  })()}
+                  {item.text}
                 </span>
                 
                 {/* Linha animada */}
@@ -200,7 +207,7 @@ export default function Home() {
   </div>
 </motion.nav>
 
-      {/* Ícones de mídia social */}
+
       {/* Ícones de mídia social */}
 <motion.div
   className="fixed right-6 top-56 transform -translate-y-1/2 flex flex-col space-y-6 z-50 max-lg:hidden"
@@ -223,18 +230,18 @@ export default function Home() {
 {/* Ícones mobile no topo */}
 {!isMenuOpen && (
   <motion.div
-    className="lg:hidden fixed right-4 top-4 flex items-center space-x-4 z-40"
+    className="lg:hidden absolute right-4 top-64 transform -translate-y-1/2 flex flex-col space-y-10 z-40"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: 0.5 }}
   >
-    <a href="https://github.com/VictorSantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954]">
+    <a href="https://github.com/VictorSantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954] transition-colors duration-300">
       <AiFillGithub />
     </a>
-    <a href="https://www.linkedin.com/in/victorsantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954]">
+    <a href="https://www.linkedin.com/in/victorsantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954] transition-colors duration-300">
       <AiFillLinkedin />
     </a>
-    <a href="https://www.instagram.com/victorsantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954]">
+    <a href="https://www.instagram.com/victorsantuccii" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-[#1DB954] transition-colors duration-300">
       <AiFillInstagram />
     </a>
   </motion.div>
@@ -247,8 +254,8 @@ export default function Home() {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 1 }}
 >
-  {/* Efeito de rede neural */}
-  <div className="absolute inset-0 overflow-hidden">
+
+<div className="absolute inset-0 overflow-hidden">
     {[...Array(50)].map((_, i) => (
       <motion.div
         key={i}
@@ -270,13 +277,12 @@ export default function Home() {
         }}
       />
     ))}
-    
-    {/* Conexões entre partículas */}
-    <div className="absolute inset-0">
+
+<div className="absolute inset-0">
       {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute h-[1px] bg-gradient-to-r from-[#1DB954] to-transparent"
+          className="absolute h-[1px] bg-gradient-to-r from-[#1d95b9] to-transparent"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
@@ -301,6 +307,33 @@ export default function Home() {
     </div>
   </div>
 
+
+  {/* Efeito de partículas de fundo */}
+  {[...Array(50)].map((_, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-1 h-1 bg-[#1db9b172] rounded-full"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+      }}
+      animate={{
+        x: [0, Math.random() * 100 - 50, 0],
+        y: [0, Math.random() * 100 - 50, 0],
+        opacity: [0.2, 0.8, 0.2],
+        scale: [1, 1.5, 1]
+      }}
+      transition={{
+        duration: Math.random() * 5 + 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  ))}
+
+  {/* Efeito de grade digital */}
+  <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+
   {/* Efeito de pulso central */}
   <motion.div
     className="absolute inset-0 flex items-center justify-center"
@@ -309,10 +342,10 @@ export default function Home() {
     transition={{ duration: 2 }}
   >
     <div className="absolute w-[200%] h-[200%] bg-radial-gradient(circle, #1DB954 0%, transparent 70%) animate-pulse opacity-10" />
+    <div className="absolute w-[150%] h-[150%] bg-radial-gradient(circle, #1DB954 0%, transparent 70%) animate-pulse opacity-15 delay-1000" />
   </motion.div>
 
-  {/* Conteúdo principal */}
-  {/* Animação de digitação para "Víctor Santucci" */}
+  {/* Nome e título */}
   <motion.h1
     className="text-5xl font-jura font-light mb-8 relative z-10"
     initial={{ opacity: 0, y: -50 }}
@@ -336,7 +369,7 @@ export default function Home() {
     </motion.span>
   </motion.h1>
 
-  {/* Espaço para a foto com animações */}
+  {/* Foto com efeitos */}
   <motion.div
     className="w-48 h-48 bg-gray-700 rounded-full mb-12 overflow-hidden relative z-10"
     initial={{ opacity: 0, scale: 0.8 }}
@@ -344,13 +377,8 @@ export default function Home() {
     transition={{ duration: 0.8, delay: 1.5 }}
     whileHover={{ scale: 1.1, rotate: 5 }}
   >
-    {/* Efeito de brilho neon */}
     <div className="absolute inset-0 rounded-full shadow-[0_0_20px_5px_rgba(29,185,84,0.3)] opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-    
-    {/* Efeito de digitalização */}
     <div className="absolute inset-0 bg-[linear-gradient(transparent_95%,#1DB954_98%)] opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
-    
-    {/* Coloque sua foto aqui */}
     <img
       src="/victor.jpeg"
       alt="Víctor Santucci"
@@ -358,31 +386,45 @@ export default function Home() {
     />
   </motion.div>
 
-  {/* Animação de digitação para "Desenvolvedor de Software Full Stack" */}
-  <motion.p
-    className="text-lg mb-8 relative z-10"
+  {/* Efeito de alternância de texto */}
+  <motion.div
+    className="text-lg mb-8 relative z-10 font-jura"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
   >
-    <motion.span className="font-jura"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 1.5 }}
-    >
-      Desenvolvedor de Software Full Stack 
-    </motion.span>
-  </motion.p>
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={currentTitle}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center justify-center space-x-2"
+      >
+        {currentTitle === titles[0] ? (
+          <>
+            <span>Desenvolvedor Full Stack</span>
+          </>
+        ) : (
+          <>
+            <FiMapPin className="text-[#1DB954]" />
+            <span>Franca - São Paulo | Brasil</span>
+          </>
+        )}
+      </motion.span>
+    </AnimatePresence>
+  </motion.div>
 
-  {/* Novo Botão GitHub Animado */}
+  {/* Botão GitHub */}
   <motion.a
     href="https://github.com/VictorSantuccii"
     target="_blank"
     rel="noopener noreferrer"
-    className="relative overflow-hidden group px-8 py-3 rounded-lg font-jura font-medium bg-gradient-to-r from-[#1DB954]/80 to-[#18a848] text-white flex items-center gap-2"
+    className="relative overflow-hidden group px-8 py-3 rounded-lg font-jura font-medium bg-gradient-to-r from-[#29E0C2]/80 to-[#18a848] text-white flex items-center gap-2"
     whileHover={{ 
       scale: 1.05,
-      boxShadow: "0 0 25px rgba(29, 185, 84, 0.3)"
+      boxShadow: "0 0 10px #29E7CD"
     }}
     whileTap={{ scale: 0.95 }}
     transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -391,10 +433,8 @@ export default function Home() {
     Ver meus trabalhos
     <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,#1DB954_50%,transparent_75%)] bg-[length:400%_400%] opacity-0 group-hover:opacity-100 group-hover:animate-shine transition-all duration-300" />
   </motion.a>
-
 </motion.div>
 
-{/* Seção Sobre Mim */}
 {/* Seção Sobre Mim */}
 <motion.section
   id="sobre"
@@ -403,6 +443,41 @@ export default function Home() {
   animate={{ opacity: 1 }}
   transition={{ duration: 1 }}
 >
+
+{[...Array(20)].map((_, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-4 h-4 bg-[#1db95430] opacity-50"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        transform: `rotate(${Math.random() * 360}deg)`
+      }}
+      animate={{
+        opacity: [0.2, 0.8, 0.2],
+        scale: [1, 1.2, 1],
+      }}
+      transition={{
+        duration: Math.random() * 3 + 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  ))}
+
+  
+
+<motion.div
+    className="absolute inset-0 flex items-center justify-center"
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 2 }}
+  >
+    <div className="absolute w-[200%] h-[200%] bg-radial-gradient(circle, #1DB954 0%, transparent 70%) animate-pulse opacity-10" />
+  </motion.div>
+
+  
+
   {/* Efeito de partículas de fundo */}
   <div className="absolute inset-0 overflow-hidden">
     {[...Array(20)].map((_, i) => (
@@ -427,21 +502,23 @@ export default function Home() {
     ))}
   </div>
 
+  
+
   {/* Efeito de grid digital */}
   <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
 
   <div className="max-w-4xl mx-auto relative z-10">
     <motion.h2
-      className="text-3xl font-jura font-semibold text-center text-[#1DB954] mb-8"
+      className="text-3xl font-geist-mono font-semibold text-center text-[#1DB954] mb-8"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      Sobre Mim
+      ../Sobre Mim
     </motion.h2>
     
     <motion.div
-      className="text-lg font-jura text-justify space-y-6 leading-relaxed"
+      className="text-lg font-geist-mono text-justify space-y-6 leading-relaxed"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
@@ -492,15 +569,77 @@ export default function Home() {
           >
             {text}
           </motion.span>
+          
         ))}
       </motion.p>
+      <motion.div 
+    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}
+  >
+
+
+
+
+    {[
+      {
+        icon: <FiCode className="text-3xl" />,
+        title: "Código Limpo",
+        description: "Comprometido com princípios SOLID e Clean Architecture. Foco em legibilidade, manutenibilidade e boas práticas de desenvolvimento.",
+        color: "#DEE0E3"
+      },
+      {
+        icon: <FiTool className="text-3xl" />,
+        title: "Resolução de Problemas",
+        description: "Habilidade analítica para decompor desafios complexos. Abordagem sistemática com foco em soluções eficientes e escaláveis.",
+        color: "#F7F06D"
+      },
+      {
+        icon: <FiZap className="text-3xl" />,
+        title: "Otimização de Performance",
+        description: "Expertise em identificar gargalos e implementar melhorias. Domínio de técnicas de caching e algoritmos eficientes.",
+        color: "#00E0FF"
+      },
+      {
+        icon: <FiUsers className="text-3xl" />,
+        title: "Trabalho em Equipe",
+        description: "Comunicação clara e colaboração eficaz. Experiência em metodologias ágeis e integração contínua com times multidisciplinares.",
+        color: "#FF00FF"
+      }
+    ].map((skill, index) => (
+      <motion.div
+        key={index}
+        className="p-6 bg-[#0a0a0a]/90 backdrop-blur-sm rounded-xl border-2 border-[#1DB954]/20 hover:border-[#48E5C2]/50 transition-all duration-300 group relative overflow-hidden"
+        whileHover={{ y: -10 }}
+      >
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-[#124D69]/10 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#1DB954]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        <div className="relative z-10">
+          <div className="w-12 h-12 flex items-center justify-center rounded-lg mb-4" style={{ backgroundColor: `${skill.color}20` }}>
+            {skill.icon}
+          </div>
+          <h3 className="text-xl font-semibold mb-2 font-geist-mono" style={{ color: skill.color }}>
+            {skill.title}
+          </h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            {skill.description}
+          </p>
+        </div>
+      </motion.div>
+    ))}
+  </motion.div>
     </motion.div>
   </div>
+
+  
 </motion.section>
 
 
 
-      {/* Seção de Habilidades */}
+     
+{/* Seção de Habilidades */}
 <motion.section
   id="skills"
   className="py-20 bg-[#000000] relative overflow-hidden"
@@ -508,46 +647,21 @@ export default function Home() {
   animate={{ opacity: 1 }}
   transition={{ duration: 1 }}
 >
-  {/* Efeito de partículas de fundo */}
-  <div className="absolute inset-0 overflow-hidden">
-    {[...Array(30)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-1 h-1 bg-[#1DB954] rounded-full"
-        style={{
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          x: [0, Math.random() * 100 - 50, 0],
-          y: [0, Math.random() * 100 - 50, 0],
-          opacity: [0.2, 0.8, 0.2],
-          scale: [1, 1.5, 1]
-        }}
-        transition={{
-          duration: Math.random() * 5 + 3,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-    ))}
-  </div>
-
   <div className="relative z-10">
     <motion.h2
-      className="text-3xl font-jura mb-10 font-semibold text-center text-[#1DB954] mb-8"
+      className="text-3xl font-geist-mono mb-10 font-semibold text-center text-[#1DB954] mb-8"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      Habilidades
+      ../Habilidades
     </motion.h2>
 
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-center mx-auto max-w-6xl px-4 relative z-10">
       {skills.map((skill, index) => (
         <motion.div
           key={index}
-          className="relative bg-[#0a0a0a]/90 text-white font-jura py-6 px-6 rounded-lg overflow-hidden group cursor-pointer backdrop-blur-sm"
+          className="relative bg-[#0a0a0a]/90 text-white font-geist-mono py-6 px-6 rounded-lg overflow-hidden group cursor-pointer backdrop-blur-sm"
           initial={{ opacity: 0, scale: 0.8, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ 
@@ -558,42 +672,57 @@ export default function Home() {
             damping: 15,
             ease: "easeOut"
           }}
-          whileHover={{ 
-            y: -15,
-            scale: 1.05,
-            backgroundColor: "#1c1c1c"
-          }}
-       
         >
-          {/* Efeito de gradiente animado */}
-          <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#1DB954_0%,#0F172A_50%,#1DB954_100%)] opacity-0 group-hover:opacity-20 animate-rotate"></div>
+          <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-[gray]/10 rounded-full blur-3xl"></div>
+
+
+
+          {/* Efeito de gradiente animado com cor personalizada */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-20 animate-rotate"
+            style={{
+              background: `conic-gradient(from 90deg at 50% 50%, ${skill.color} 0%, #0F172A 50%, ${skill.color} 100%)`
+            }}
+          />
           
-          {/* Borda sutil */}
-          <div className="absolute inset-0 border-2 border-[#1DB954]/10 rounded-lg group-hover:border-[#1DB954]/40 transition-all duration-300"></div>
+          {/* Borda sutil com cor da habilidade */}
+          <div 
+            className="absolute inset-0 border-2 rounded-lg transition-all duration-300"
+            style={{ borderColor: `${skill.color}20` }}
+          />
           
           {/* Conteúdo */}
           <div className="relative z-10 flex flex-col items-center justify-center">
-            <div className={`text-5xl mb-2 text-[${skill.color}] group-hover:text-[#1DB954] transition-colors duration-300 relative`}>
+            <div 
+              className="text-5xl mb-2 relative"
+              style={{ color: skill.color }}
+            >
               {skill.icon}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-[#1DB954] blur-lg transition-opacity duration-300"></div>
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300"
+                style={{ backgroundColor: skill.color }}
+              />
             </div>
-            <span className="text-sm font-medium group-hover:text-[#1DB954] transition-colors duration-300 relative">
+            <span 
+              className="text-sm font-medium relative mb-1"
+              style={{ color: skill.color }}
+            >
               {skill.name}
-              <span className="absolute -left-1 -right-1 h-[2px] bg-[#1DB954] bottom-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span 
+                className="absolute -left-1 -right-1 h-[2px] bottom-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                style={{ backgroundColor: skill.color }}
+              />
             </span>
+            {/* Nova informação adicionada */}
+            <p className="text-xs text-gray-400 text-center px-2">
+              Domínio avançado em desenvolvimento full-stack
+            </p>
           </div>
         </motion.div>
       ))}
     </div>
   </div>
-
-  {/* Efeitos de brilho */}
-  <div className="absolute inset-0 pointer-events-none">
-    <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#1DB954]/10 rounded-full blur-3xl"></div>
-    <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-[#1DB954]/10 rounded-full blur-3xl"></div>
-  </div>
 </motion.section>
-
 
 {/* Seção de Projetos */}
 <motion.section
@@ -626,23 +755,49 @@ export default function Home() {
     ))}
   </div>
 
+  {[...Array(20)].map((_, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-4 h-4 bg-[#1db95486] opacity-50"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        transform: `rotate(${Math.random() * 360}deg)`
+      }}
+      animate={{
+        opacity: [0.2, 0.8, 0.2],
+        scale: [1, 1.2, 1],
+      }}
+      transition={{
+        duration: Math.random() * 3 + 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  ))}
+
+
   <motion.h2
-    className="text-3xl font-jura font-semibold text-center text-[#1DB954] mb-12 relative z-10"
+    className="text-3xl font-geist-mono font-semibold text-center text-[#1DB954] mb-12 relative z-10"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: 0.2 }}
   >
-    Projeto Destaque
+    ../Projetos
   </motion.h2>
+
 
   <div className="flex justify-center px-4">
     <motion.div
-      className="relative w-full max-w-4xl bg-[#1c1c1c]/90 backdrop-blur-lg rounded-2xl overflow-hidden border-2 border-[#1DB954]/30 hover:border-[#1DB954]/60 transition-all duration-500 group"
+      className="relative w-full max-w-4xl bg-[#00000]/90 backdrop-blur-lg rounded-2xl overflow-hidden border-2 border-[#48E5C2]/30 hover:border-[#48E5C2]/60 transition-all duration-500 group"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
       whileHover={{ y: -10 }}
     >
+
+      {/* Efeito de grade holográfica */}
+
       {/* Efeito de brilho */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#1DB954_0%,transparent_70%)] opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
       
@@ -652,7 +807,7 @@ export default function Home() {
       <div className="relative z-10 p-8">
         {/* Imagem do projeto */}
         <motion.div
-          className="relative rounded-xl overflow-hidden border-2 border-[#1DB954]/30 mb-6"
+          className="relative rounded-xl overflow-hidden border-2 border-[#48E5C2]/30 mb-6"
           whileHover={{ scale: 1.02 }}
         >
           <img
@@ -665,9 +820,9 @@ export default function Home() {
         </motion.div>
 
         {/* Conteúdo */}
-        <div className="space-y-6">
+        <div className="space-y-6 font-geist-mono">
           <motion.h3
-            className="text-3xl font-bold text-[#1DB954]"
+            className="text-3xl font-bold text-[#A3F5EA]"
             initial={{ x: -20 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
@@ -693,7 +848,7 @@ export default function Home() {
 
           {/* Tecnologias */}
           <motion.div
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 font-poppins"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -701,7 +856,7 @@ export default function Home() {
             {['Node.js', 'Javascript', 'MySQL', 'Docker', 'Sequelize'].map((tech, i) => (
               <span
                 key={i}
-                className="px-3 py-1 bg-[#1DB954]/10 text-[#1DB954] rounded-full text-sm border border-[#1DB954]/30 hover:bg-[#1DB954]/20 transition-all"
+                className="px-3 py-1 bg-[#48E5C2]/10 text-[#48E5C2] rounded-full text-sm border border-[#1DB954]/30 hover:bg-[#1DB954]/20 transition-all"
               >
                 #{tech}
               </span>
@@ -719,7 +874,7 @@ export default function Home() {
     href="https://github.com/orgs/TypeBlast/repositories"
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center gap-2 px-6 py-3 bg-[#1DB954] text-black rounded-lg font-medium hover:bg-[#18a848] transition-all"
+    className="flex items-center gap-2 px-6 py-3 bg-[#A3F5EA] text-black rounded-lg font-medium hover:bg-[#DFFFD6] transition-all"
   >
     <AiFillGithub className="text-xl" />
     Ver Código
@@ -733,7 +888,7 @@ export default function Home() {
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-[#1DB954] rounded-full"
+            className="absolute w-1 h-1 bg-[#ffffff] rounded-full"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -760,7 +915,7 @@ export default function Home() {
   </div>
 </motion.section>
 
-      {/* Seção de Contato */}
+      
 {/* Seção de Contato */}
 <motion.section
         id="contact"
@@ -793,44 +948,75 @@ export default function Home() {
           ))}
         </div>
 
+        {[...Array(20)].map((_, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-4 h-4 bg-[#1db9542b] opacity-50"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        transform: `rotate(${Math.random() * 360}deg)`
+      }}
+      animate={{
+        opacity: [0.2, 0.8, 0.2],
+        scale: [1, 1.2, 1],
+      }}
+      transition={{
+        duration: Math.random() * 3 + 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    />
+  ))}
+
+        
+
+        
         {/* Efeito de circuito eletrônico no fundo */}
         <div className="absolute inset-0 bg-[url('/circuit-board.svg')] opacity-10 animate-pulse"></div>
 
         <motion.h2
-          className="text-3xl font-jura font-semibold text-center text-[#1DB954] mb-8 relative z-10"
+          className="text-3xl font-geist-mono font-semibold text-center text-[#1DB954] mb-8 relative z-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Contato
+          ../Contato
         </motion.h2>
 
         <div className="max-w-2xl font-jura mx-auto px-4 relative z-10">
-          <motion.form
-            className="space-y-8"
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            {['nome', 'email', 'message'].map((field, index) => (
-  <motion.div
-    key={field}
-    className="relative group"
-    initial={{ opacity: 0, x: -30 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay: 0.4 + index * 0.1 }}
-  >
-    <label 
-      htmlFor={field}
-      className="block text-sm font-medium text-[#ffffff] mb-2 ml-1 transition-all duration-300 group-hover:ml-2"
+    <motion.form
+      className="space-y-8"
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
     >
-      {{
-        nome: 'Nome',
-        email: 'E-mail',
-        message: 'Mensagem'
-      }[field]}
-    </label>
+      {[
+        { field: 'nome', icon: <FiUser className="text-[#1DB954] mr-2" /> },
+        { field: 'email', icon: <FiMail className="text-[#1DB954] mr-2" /> },
+        { field: 'message', icon: <FiMessageCircle className="text-[#1DB954] mr-2" /> }
+      ].map(({ field, icon }, index) => (
+        <motion.div
+          key={field}
+          className="relative group"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 + index * 0.1 }}
+        >
+          <label 
+            htmlFor={field}
+            className="block text-sm font-medium text-[#ffffff] mb-2 ml-1 transition-all duration-300 group-hover:ml-2"
+          >
+            <div className="flex items-center">
+              {icon}
+              {{
+                nome: 'Nome',
+                email: 'E-mail',
+                message: 'Mensagem'
+              }[field]}
+            </div>
+          </label>
     
     <div className="relative">
       {field === 'message' ? (
@@ -897,6 +1083,29 @@ export default function Home() {
 
           .animate-shine {
             animation: shine 2s linear infinite;
+          }
+
+          @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+          }
+
+          @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #1DB954 }
+          }
+
+          .typing-animation {
+            display: inline-block;
+            position: relative;
+            animation: typing 2s steps(15, end), blink-caret .75s step-end infinite;
+            border-right: 2px solid #1DB954;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+
+          .cursor-blink {
+            animation: blink-caret 0.75s step-end infinite;
           }
           
           @keyframes matrix {
