@@ -28,11 +28,31 @@ const skills = [
   export default function Home() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = (e: any) => {
       e.preventDefault();
-      e.target.reset(); 
+    
+      // Captura os valores do formulário
+      const nome = e.target.nome.value;
+      const email = e.target.email.value;
+      const message = e.target.message.value;
+      const metodo = e.target.metodo.value; // Novo campo de seleção
+    
+      if (metodo === 'whatsapp') {
+        // Cria a mensagem que será enviada
+        const mensagemWhatsApp = `Olá, meu nome é ${nome} (${email}). ${message}`;
+        const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
+        window.open(`https://wa.me/5516991440887?text=${mensagemCodificada}`, '_blank');
+      } else if (metodo === 'email') {
+        // Cria o link de e-mail
+        const assunto = encodeURIComponent(`Contato de ${nome}`);
+        const corpo = encodeURIComponent(`Nome: ${nome}\nE-mail: ${email}\nMensagem: ${message}`);
+        const mailtoLink = `mailto:victorsantuccii@gmail.com?subject=${assunto}&body=${corpo}`;
+        window.location.href = mailtoLink;
+      }
+    
+      // Reseta o formulário
+      e.target.reset();
     };
-
   const titles = ["Desenvolvedor de Software Full Stack", "Franca - São Paulo | Brasil "];
   const [currentTitle, setCurrentTitle] = useState(titles[0]);
 
@@ -1044,21 +1064,47 @@ const skills = [
     </div>
   </motion.div>
 ))}
+  <motion.div
+    className="relative group"
+    initial={{ opacity: 0, x: -30 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 0.4 + 3 * 0.1 }} // Ajuste o delay conforme necessário
+  >
+    <label 
+      htmlFor="metodo"
+      className="block text-sm font-medium text-[#ffffff] mb-2 ml-1 transition-all duration-300 group-hover:ml-2"
+    >
+      <div className="flex items-center">
+        <FiTool className="text-[#1DB954] mr-2" />
+        Método de Contato
+      </div>
+    </label>
+    <select
+      id="metodo"
+      name="metodo"
+      className="w-full px-4 py-3 bg-[#1c1c1c]/80 backdrop-blur-sm text-white rounded-lg border-2 border-[#1DB954]/30 focus:border-[#1DB954] focus:ring-2 focus:ring-[#1DB954]/50 transition-all duration-300 outline-none placeholder-[#1DB954]/50 relative z-20"
+      required
+    >
+      <option value="whatsapp">WhatsApp</option>
+      <option value="email">E-mail</option>
+    </select>
+  </motion.div>
 
-            <motion.div
-              className="flex justify-center"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            >
-       <button
-        type="submit"
-        className="px-8 py-3 bg-gradient-to-r from-[#1DB954] to-emerald-400 text-white rounded-lg font-medium relative overflow-hidden group transition-all duration-300 hover:shadow-[0_0_25px_rgba(29,185,84,0.5)]"
-      >
-        Enviar Mensagem
-      </button>
-            </motion.div>
-          </motion.form>
+  {/* Botão de envio */}
+  <motion.div
+    className="flex justify-center"
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+  >
+    <button
+      type="submit"
+      className="px-8 py-3 bg-gradient-to-r from-[#1DB954] to-emerald-400 text-white rounded-lg font-medium relative overflow-hidden group transition-all duration-300 hover:shadow-[0_0_25px_rgba(29,185,84,0.5)]"
+    >
+      Enviar Mensagem
+    </button>
+  </motion.div>
+</motion.form>
         </div>
 
         {/* Efeito de scanlines */}
