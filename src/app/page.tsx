@@ -1,10 +1,16 @@
 "use client";
+
 import { FiMenu, FiX, FiUser, FiCode, FiFolder, FiMail, FiTool, FiZap, FiUsers, FiMapPin, FiMessageCircle } from 'react-icons/fi';
 import { motion, AnimatePresence } from "framer-motion";
 import { FaJs, FaNodeJs, FaReact, FaDocker, FaGitAlt } from "react-icons/fa";
 import { SiTypescript, SiNextdotjs, SiNestjs, SiPostgresql, SiPrisma, SiSequelize, SiTypeorm, SiMysql, SiMongodb, SiAndroid, SiTailwindcss } from "react-icons/si";
 import { AiFillInstagram, AiFillLinkedin, AiFillGithub, AiFillWechat } from "react-icons/ai";
 import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const skills = [
   { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
@@ -23,6 +29,33 @@ const skills = [
   { name: "MySQL", icon: <SiMysql />, color: "#4479A1" },
   { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
   { name: "React Native", icon: <SiAndroid />, color: "#3DDC84" },
+];
+
+const projects = [
+  {
+    title: "PetExpress - Sistema Pet Shop",
+    image: "/petexpress.png",
+    description: "Plataforma full-stack para gestão de Pet Shops com agendamento e controle de clientes",
+    technologies: ["Node.js", "React", "MySQL", "Docker", "Sequelize", "Vercel", "Vite"],
+    demo: "https://petexpress-typeblast.vercel.app/",
+    code: "https://github.com/orgs/TypeBlast/repositories"
+  },
+  {
+    title: "EcoCash - Controle Financeiro",
+    image: "/ecocash.png",
+    description: "Aplicação web para gestão financeira pessoal com autenticação e cloud sync",
+    technologies: ["Next.js", "Firebase", "Tailwind CSS", "Firestore", "Vercel", "Authentication Google"],
+    demo: "https://ecocash.vercel.app/",
+    code: "https://github.com/VictorSantuccii/ecocash-firebase"
+  },
+  {
+    title: "Aston Martin Concept",
+    image: "/astonmartin.png",
+    description: "Website conceitual para marca de automóveis de luxo",
+    technologies: ["Next.js", "React", "Tailwind CSS", "React-icons", "Vercel"],
+    demo: "https://astonmartin-santucci.vercel.app/",
+    code: "https://github.com/VictorSantuccii/astonmartin"
+  }
 ];
 
   export default function Home() {
@@ -752,51 +785,6 @@ const skills = [
   animate={{ opacity: 1 }}
   transition={{ duration: 1 }}
 >
-  {/* Efeito de partículas */}
-  <div className="absolute inset-0">
-    {[...Array(30)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-1 h-1 bg-[#1DB954] rounded-full"
-        style={{
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0, 0.5, 0],
-          scale: [1, 1.5, 1]
-        }}
-        transition={{
-          duration: Math.random() * 3 + 2,
-          repeat: Infinity,
-        }}
-      />
-    ))}
-  </div>
-
-  {[...Array(20)].map((_, i) => (
-    <motion.div
-      key={i}
-      className="absolute w-4 h-4 bg-[#1db95486] opacity-50"
-      style={{
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        transform: `rotate(${Math.random() * 360}deg)`
-      }}
-      animate={{
-        opacity: [0.2, 0.8, 0.2],
-        scale: [1, 1.2, 1],
-      }}
-      transition={{
-        duration: Math.random() * 3 + 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    />
-  ))}
-
-
   <motion.h2
     className="text-3xl font-geist-mono font-semibold text-center text-[#1DB954] mb-12 relative z-10"
     initial={{ opacity: 0, y: -20 }}
@@ -806,135 +794,83 @@ const skills = [
     ../Projetos
   </motion.h2>
 
-
-  <div className="flex justify-center px-4">
-    <motion.div
-      className="relative w-full max-w-4xl bg-[#00000]/90 backdrop-blur-lg rounded-2xl overflow-hidden border-2 border-[#48E5C2]/30 hover:border-[#48E5C2]/60 transition-all duration-500 group"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-      whileHover={{ y: -10 }}
+  <div className="px-4 max-w-7xl mx-auto">
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      spaceBetween={30}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 5000 }}
+      breakpoints={{
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 2 }
+      }}
+      className="swiper-projects"
     >
-
-      {/* Efeito de grade holográfica */}
-
-      {/* Efeito de brilho */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#1DB954_0%,transparent_70%)] opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-      
-      {/* Efeito de grade holográfica */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 mix-blend-overlay"></div>
-
-      <div className="relative z-10 p-8">
-        {/* Imagem do projeto */}
-        <motion.div
-          className="relative rounded-xl overflow-hidden border-2 border-[#48E5C2]/30 mb-6"
-          whileHover={{ scale: 1.02 }}
-        >
-          <img
-            src="/petexpress.png" // Altere para o caminho da sua imagem
-            alt="Projeto em Destaque"
-            className="w-full h-64 object-cover"
-          />
-          {/* Overlay de gradiente */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-        </motion.div>
-
-        {/* Conteúdo */}
-        <div className="space-y-6 font-geist-mono">
-          <motion.h3
-            className="text-3xl font-bold text-[#A3F5EA]"
-            initial={{ x: -20 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            PetExpress - Sistema de gerenciador de Pet Shop
-          </motion.h3>
-          
-          <motion.p
-            className="text-lg opacity-90 leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            Plataforma full-stack desenvolvida com Node.js, Sequelize e React e Vite, integrando:
-            <ul className="list-disc list-inside mt-3 space-y-2">
-              <li>Autenticação JWT</li>
-              <li>API REST</li>
-              <li>Banco de dados MySQL </li>
-              <li>Interface feita com React e Vite</li>
-              <li>Deploy com Docker e CI/CD</li>
-            </ul>
-          </motion.p>
-
-          {/* Tecnologias */}
+      {projects.map((project, index) => (
+        <SwiperSlide key={index}>
           <motion.div
-            className="flex flex-wrap gap-4 font-poppins"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            className="relative bg-[#0a0a0a]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#48E5C2]/30 hover:border-[#48E5C2]/60 transition-all duration-500 h-full"
+            whileHover={{ y: -10 }}
           >
-            {['Node.js', 'Javascript', 'MySQL', 'Docker', 'Sequelize'].map((tech, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 bg-[#48E5C2]/10 text-[#48E5C2] rounded-full text-sm border border-[#1DB954]/30 hover:bg-[#1DB954]/20 transition-all"
-              >
-                #{tech}
-              </span>
-            ))}
+            <div className="relative h-64 overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+            </div>
+
+            <div className="p-6 space-y-4">
+              <h3 className="text-2xl font-jura font-bold text-[#A3F5EA]">
+                {project.title}
+              </h3>
+              
+              <p className="text-gray-300 font-geist-mono">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="px-3 py-1 bg-[#48E5C2]/10 text-[#48E5C2] rounded-full text-sm border border-[#1DB954]/30"
+                  >
+                    #{tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex gap-4 mt-4">
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#A3F5EA] text-black rounded-lg font-jura hover:bg-[#DFFFD6] transition-colors"
+                >
+                  <FiZap className="text-sm" />
+                  Demo
+                </a>
+                <a
+                  href={project.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 border border-[#48E5C2] text-[#48E5C2] rounded-lg font-jura hover:bg-[#48E5C2]/10 transition-colors"
+                >
+                  <FiCode className="text-sm" />
+                  Código
+                </a>
+              </div>
+            </div>
           </motion.div>
-
-          {/* Botões */}
-<motion.div
-  className="flex gap-4 mt-8 font-jura"
-  initial={{ y: 20 }}
-  animate={{ y: 0 }}
-  transition={{ delay: 0.3 }}
->
-  <a
-    href="https://github.com/orgs/TypeBlast/repositories"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 px-6 py-3 bg-[#A3F5EA] text-black rounded-lg font-medium hover:bg-[#DFFFD6] transition-all"
-  >
-    <AiFillGithub className="text-xl" />
-    Ver Código
-  </a>
-</motion.div>
-        </div>
-      </div>
-
-      {/* Efeito de partículas flutuantes */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-[#ffffff] rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.5, 1, 0.5],
-              scale: [1, 1.5, 1]
-            }}
-            transition={{
-              duration: Math.random() * 2 + 1,
-              repeat: Infinity,
-            }}
-          />
-        ))}
-      </div>
-    </motion.div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   </div>
-
-  {/* Efeitos de brilho externo */}
-  <div className="absolute inset-0 pointer-events-none">
-    <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#1DB954]/10 rounded-full blur-3xl"></div>
-    <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-[#1DB954]/10 rounded-full blur-3xl"></div>
-  </div>
-</motion.section>
-
+  </motion.section>
       
 {/* Seção de Contato */}
 <motion.section
@@ -1165,6 +1101,28 @@ const skills = [
             100% { transform: translate(0, 0); }
           }
 
+              .swiper-projects {
+          padding-bottom: 40px;
+        }
+    
+          .swiper-projects .swiper-button-next,
+          .swiper-projects .swiper-button-prev {
+            color: #1DB954;
+            background: rgba(29, 185, 84, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+          }
+          
+          .swiper-projects .swiper-pagination-bullet {
+            background: #fff;
+            opacity: 0.4;
+          }
+          
+          .swiper-projects .swiper-pagination-bullet-active {
+            background: #1DB954;
+            opacity: 1;
+          }
           .animate-particle-network {
             animation: particle-network 10s infinite linear;
           }
