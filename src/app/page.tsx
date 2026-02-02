@@ -3,7 +3,7 @@
 import { FiMenu, FiX, FiUser, FiCode, FiFolder, FiMail, FiTool, FiZap, FiUsers, FiMapPin, FiMessageCircle } from 'react-icons/fi';
 import { motion, AnimatePresence } from "framer-motion";
 import { FaJs, FaNodeJs, FaReact, FaDocker, FaGitAlt } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiNestjs, SiPostgresql, SiPrisma, SiSequelize, SiTypeorm, SiMysql, SiMongodb, SiAndroid, SiTailwindcss } from "react-icons/si";
+import { SiTypescript, SiNextdotjs, SiNestjs, SiPostgresql, SiPrisma, SiSequelize, SiTypeorm, SiMysql, SiMongodb, SiAndroid, SiTailwindcss, SiSupabase } from "react-icons/si";
 import { AiFillInstagram, AiFillLinkedin, AiFillGithub, AiFillWechat } from "react-icons/ai";
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -33,6 +33,14 @@ const skills = [
 
 const projects = [
   {
+    title: "LogicBridge - Conversor Lógico",
+    image: "/logicbridge.png",
+    description: "Transforme frases do português em fórmulas lógicas e vice-versa com nossa tecnologia de ponta. Uma ponte inteligente entre linguagem natural e lógica proposicional.",
+    technologies: ["Next.js", "Supabase", "OAuth", "Tailwind", "Gemini", "Genkit"],
+    demo: "https://logicbridge.vercel.app/",
+    code: "https://github.com/trabalhoMarcio/logicBridge"
+  },
+  {
     title: "PetExpress - Sistema Pet Shop",
     image: "/petexpress.png",
     description: "Plataforma full-stack para gestão de Pet Shops com agendamento e controle de clientes",
@@ -58,34 +66,35 @@ const projects = [
   }
 ];
 
-  export default function Home() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const handleSubmit = (e: any) => {
-      e.preventDefault();
-    
-      // Captura os valores do formulário
-      const nome = e.target.nome.value;
-      const email = e.target.email.value;
-      const message = e.target.message.value;
-      const metodo = e.target.metodo.value; // Novo campo de seleção
-    
-      if (metodo === 'whatsapp') {
-        // Cria a mensagem que será enviada
-        const mensagemWhatsApp = `Olá, meu nome é ${nome} (${email}). ${message}`;
-        const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
-        window.open(`https://wa.me/5516991440887?text=${mensagemCodificada}`, '_blank');
-      } else if (metodo === 'email') {
-        // Cria o link de e-mail
-        const assunto = encodeURIComponent(`Contato de ${nome}`);
-        const corpo = encodeURIComponent(`Nome: ${nome}\nE-mail: ${email}\nMensagem: ${message}`);
-        const mailtoLink = `mailto:victorsantuccii@gmail.com?subject=${assunto}&body=${corpo}`;
-        window.location.href = mailtoLink;
-      }
-    
-      // Reseta o formulário
-      e.target.reset();
-    };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  
+    // Captura os valores do formulário
+    const nome = e.target.nome.value;
+    const email = e.target.email.value;
+    const message = e.target.message.value;
+    const metodo = e.target.metodo.value; // Novo campo de seleção
+  
+    if (metodo === 'whatsapp') {
+      // Cria a mensagem que será enviada
+      const mensagemWhatsApp = `Olá, meu nome é ${nome} (${email}). ${message}`;
+      const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
+      window.open(`https://wa.me/5516991440887?text=${mensagemCodificada}`, '_blank');
+    } else if (metodo === 'email') {
+      // Cria o link de e-mail
+      const assunto = encodeURIComponent(`Contato de ${nome}`);
+      const corpo = encodeURIComponent(`Nome: ${nome}\nE-mail: ${email}\nMensagem: ${message}`);
+      const mailtoLink = `mailto:victorsantuccii@gmail.com?subject=${assunto}&body=${corpo}`;
+      window.location.href = mailtoLink;
+    }
+  
+    // Reseta o formulário
+    e.target.reset();
+  };
+  
   const titles = ["Desenvolvedor de Software Full Stack", "Franca - São Paulo | Brasil "];
   const [currentTitle, setCurrentTitle] = useState(titles[0]);
 
