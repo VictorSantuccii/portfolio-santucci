@@ -1,0 +1,72 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF8FF" />
+      <stop offset="0.55" stop-color="#F3FAFF" />
+      <stop offset="1" stop-color="#ECFDFB" />
+    </linearGradient>
+    <radialGradient id="blobA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 140) rotate(20) scale(420 300)">
+      <stop stop-color="#14B8A6" stop-opacity="0.38" />
+      <stop offset="1" stop-color="#14B8A6" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="blobB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1350 210) rotate(-16) scale(360 280)">
+      <stop stop-color="#0EA5E9" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#0EA5E9" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="blobC" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 760) rotate(-8) scale(520 360)">
+      <stop stop-color="#2DD4BF" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#2DD4BF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="line" x1="180" y1="180" x2="1420" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5A4" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#0284C7" stop-opacity="0.1" />
+    </linearGradient>
+    <linearGradient id="signature" x1="420" y1="430" x2="1180" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#0369A1" stop-opacity="0.88" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#base)" />
+  <rect width="1600" height="900" fill="url(#blobA)" />
+  <rect width="1600" height="900" fill="url(#blobB)" />
+  <rect width="1600" height="900" fill="url(#blobC)" />
+
+  <g opacity="0.42" stroke="url(#line)" stroke-width="1.2">
+    <path d="M120 200H540" />
+    <path d="M220 290H700" />
+    <path d="M860 250H1480" />
+    <path d="M920 350H1380" />
+    <path d="M180 650H740" />
+    <path d="M860 700H1460" />
+    <path d="M440 140V420" />
+    <path d="M690 180V520" />
+    <path d="M1040 120V460" />
+    <path d="M1310 220V620" />
+  </g>
+
+  <g fill="#0EA5A4" fill-opacity="0.22">
+    <circle cx="440" cy="200" r="5" />
+    <circle cx="700" cy="290" r="4" />
+    <circle cx="980" cy="250" r="5" />
+    <circle cx="1310" cy="350" r="4" />
+    <circle cx="690" cy="520" r="5" />
+    <circle cx="1040" cy="460" r="4" />
+  </g>
+
+  <g fill="#0284C7" fill-opacity="0.18">
+    <circle cx="540" cy="200" r="3" />
+    <circle cx="920" cy="350" r="3" />
+    <circle cx="1460" cy="700" r="3" />
+    <circle cx="220" cy="290" r="3" />
+  </g>
+
+  <g opacity="0.92">
+    <text x="800" y="500" text-anchor="middle" fill="url(#signature)" font-family="Jura, Poppins, sans-serif" font-size="86" font-weight="700" letter-spacing="8">
+      VICTOR SANTUCCI
+    </text>
+    <text x="800" y="545" text-anchor="middle" fill="#0F766E" fill-opacity="0.78" font-family="Geist, Poppins, sans-serif" font-size="28" letter-spacing="10">
+      FULL STACK DEV
+    </text>
+  </g>
+</svg>

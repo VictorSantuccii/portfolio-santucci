@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FiMenu,
   FiX,
+  FiHome,
   FiUser,
   FiCode,
   FiFolder,
@@ -49,11 +50,19 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const navSections = [
-  { id: "home", label: "home" },
-  { id: "sobre", label: "sobre" },
-  { id: "habilidades", label: "habilidades" },
-  { id: "projects", label: "projetos" },
-  { id: "contact", label: "contato" },
+  { id: "home", label: "home", icon: <FiHome className="text-sm" /> },
+  { id: "sobre", label: "sobre", icon: <FiUser className="text-sm" /> },
+  {
+    id: "habilidades",
+    label: "habilidades",
+    icon: <FiTool className="text-sm" />,
+  },
+  {
+    id: "projects",
+    label: "projetos",
+    icon: <FiFolder className="text-sm" />,
+  },
+  { id: "contact", label: "contato", icon: <FiMail className="text-sm" /> },
 ];
 
 const habilidades = [
@@ -429,13 +438,15 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#F6F8FC] text-slate-800 pt-20 md:pt-24">
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-32 -left-20 h-[30rem] w-[30rem] rounded-full bg-[#0EA5A4]/12 blur-3xl animate-pulse-slow" />
-        <div className="absolute top-1/3 -right-20 h-[28rem] w-[28rem] rounded-full bg-[#38BDF8]/10 blur-3xl animate-pulse-slower" />
-        <div className="absolute -bottom-24 left-1/3 h-[22rem] w-[22rem] rounded-full bg-[#0EA5A4]/8 blur-3xl animate-float-soft" />
-        <div className="absolute inset-0 opacity-50 bg-[radial-gradient(circle_at_10%_20%,rgba(14,165,164,0.09),transparent_32%),radial-gradient(circle_at_85%_78%,rgba(56,189,248,0.09),transparent_30%)] animate-drift-slow" />
-        <div className="absolute inset-0 opacity-35 bg-[linear-gradient(rgba(14,165,164,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.06)_1px,transparent_1px)] bg-[size:48px_48px] animate-tech-grid" />
-        <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_center,rgba(14,165,164,0.14)_0%,transparent_45%),radial-gradient(circle_at_center,rgba(2,132,199,0.08)_0%,transparent_62%)] animate-orbit-soft" />
-        <div className="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,transparent_20%,rgba(14,165,164,0.2)_35%,transparent_55%)] animate-scan-slow" />
+        <div className="hidden md:block absolute -top-32 -left-20 h-[30rem] w-[30rem] rounded-full bg-[#0EA5A4]/14 blur-3xl animate-pulse-slow" />
+        <div className="hidden md:block absolute top-1/3 -right-20 h-[28rem] w-[28rem] rounded-full bg-[#38BDF8]/12 blur-3xl animate-pulse-slower" />
+        <div className="hidden md:block absolute -bottom-24 left-1/3 h-[22rem] w-[22rem] rounded-full bg-[#0EA5A4]/10 blur-3xl animate-float-soft" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.45] bg-[radial-gradient(circle_at_10%_20%,rgba(14,165,164,0.10),transparent_32%),radial-gradient(circle_at_85%_78%,rgba(56,189,248,0.09),transparent_30%)] animate-drift-slow" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.28] bg-[linear-gradient(rgba(14,165,164,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.07)_1px,transparent_1px)] bg-[size:56px_56px] animate-tech-grid" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.22] bg-[radial-gradient(circle_at_center,rgba(14,165,164,0.16)_0%,transparent_45%),radial-gradient(circle_at_center,rgba(2,132,199,0.10)_0%,transparent_62%)] animate-orbit-soft" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.18] bg-[linear-gradient(120deg,transparent_22%,rgba(14,165,164,0.22)_38%,transparent_58%)] animate-scan-slow" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.20] bg-[radial-gradient(circle,rgba(14,165,164,0.26)_1px,transparent_1.5px)] bg-[size:34px_34px] animate-node-drift" />
+        <div className="hidden md:block absolute inset-0 opacity-[0.16] bg-[linear-gradient(90deg,transparent_0%,rgba(56,189,248,0.20)_45%,transparent_80%)] animate-circuit-sweep" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,164,0.12),transparent_40%),linear-gradient(180deg,#F9FBFE_0%,#EFF5FC_45%,#F8FAFD_100%)]" />
       </div>
 
@@ -493,7 +504,10 @@ export default function Home() {
                             }}
                           />
                         )}
-                        <span className="relative z-10">{section.label}</span>
+                        <span className="relative z-10 inline-flex items-center gap-1.5">
+                          {section.icon}
+                          <span>{section.label}</span>
+                        </span>
                       </button>
                       {index < navSections.length - 1 && (
                         <span className="mx-1 h-4 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
@@ -546,7 +560,10 @@ export default function Home() {
                           : "text-slate-700 hover:bg-white"
                       }`}
                     >
-                      {section.label}
+                      <span className="inline-flex items-center gap-2">
+                        {section.icon}
+                        <span>{section.label}</span>
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -1173,8 +1190,8 @@ export default function Home() {
           }
           100% {
             background-position:
-              48px 48px,
-              48px 48px;
+              56px 56px,
+              56px 56px;
           }
         }
 
@@ -1212,6 +1229,40 @@ export default function Home() {
 
         .animate-scan-slow {
           animation: scan-slow 14s ease-in-out infinite;
+        }
+
+        @keyframes node-drift {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+            opacity: 0.08;
+          }
+          50% {
+            transform: translate3d(8px, -6px, 0);
+            opacity: 0.15;
+          }
+        }
+
+        @keyframes circuit-sweep {
+          0% {
+            transform: translateX(-38%);
+            opacity: 0;
+          }
+          35% {
+            opacity: 0.12;
+          }
+          100% {
+            transform: translateX(38%);
+            opacity: 0;
+          }
+        }
+
+        .animate-node-drift {
+          animation: node-drift 20s ease-in-out infinite;
+        }
+
+        .animate-circuit-sweep {
+          animation: circuit-sweep 18s ease-in-out infinite;
         }
 
         @keyframes caret-blink {
