@@ -318,12 +318,14 @@ const reveal = {
 function SectionHeading({
   eyebrow,
   title,
+  animation = reveal,
 }: {
   eyebrow: string;
   title: string;
+  animation?: typeof reveal;
 }) {
   return (
-    <motion.div className="mb-8 md:mb-10 text-center" {...reveal}>
+    <motion.div className="mb-8 md:mb-10 text-center" {...animation}>
       <p className="mx-auto mb-2 md:mb-3 inline-flex rounded-full border border-[#7DD3FC]/60 bg-white/70 px-3 md:px-4 py-1 text-[10px] md:text-xs font-geist-mono uppercase tracking-[0.16em] md:tracking-[0.2em] text-[#0369A1] shadow-[0_6px_14px_rgba(14,165,164,0.12)]">
         {eyebrow}
       </p>
@@ -338,9 +340,19 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [messageIndex, setMessageIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const stableReveal = isSmallScreen
+    ? {
+        initial: { opacity: 1, y: 0 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0 },
+        transition: { duration: 0.01 },
+      }
+    : reveal;
 
   const typingMessages = [
     "Olá, meu nome é Victor Santucci </>",
@@ -409,6 +421,18 @@ export default function Home() {
 
     return () => clearTimeout(timeoutId);
   }, [typedText, isDeleting, messageIndex]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsSmallScreen(media.matches);
+
+    onChange();
+    media.addEventListener("change", onChange);
+
+    return () => {
+      media.removeEventListener("change", onChange);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -576,7 +600,7 @@ export default function Home() {
       <motion.section
         id="home"
         className="relative min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] flex items-center"
-        {...reveal}
+        {...stableReveal}
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center">
           <motion.h1
@@ -641,9 +665,17 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <motion.section id="sobre" className="py-14 md:py-20 px-4" {...reveal}>
+      <motion.section
+        id="sobre"
+        className="py-14 md:py-20 px-4"
+        {...stableReveal}
+      >
         <div className="mx-auto max-w-6xl">
-          <SectionHeading eyebrow="Sobre" title="Quem Sou Eu" />
+          <SectionHeading
+            eyebrow="Sobre"
+            title="Quem Sou Eu"
+            animation={stableReveal}
+          />
 
           <motion.div
             className="mx-auto max-w-4xl text-left md:text-justify text-slate-700 leading-relaxed text-sm sm:text-base space-y-4 md:space-y-6"
@@ -730,21 +762,32 @@ export default function Home() {
       <motion.section
         id="habilidades"
         className="py-14 md:py-20 px-4"
-        {...reveal}
+        {...stableReveal}
       >
         <div className="mx-auto max-w-6xl">
-          <SectionHeading eyebrow="Tecnologias" title="Habilidades" />
+          <SectionHeading
+            eyebrow="Tecnologias"
+            title="Habilidades"
+            animation={stableReveal}
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {habilidades.map((skill, index) => (
               <motion.article
                 key={skill.name}
                 className="group relative rounded-xl border border-slate-200/90 bg-white/85 p-4 md:p-6 text-center shadow-[0_8px_22px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-[0_12px_24px_rgba(14,165,164,0.14)]"
-                initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                initial={
+                  isSmallScreen
+                    ? { opacity: 1, y: 0, scale: 1 }
+                    : { opacity: 0, y: 24, scale: 0.95 }
+                }
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.35, delay: index * 0.05 }}
-                whileHover={{ y: -6 }}
+                viewport={{ once: true, amount: isSmallScreen ? 0 : 0.25 }}
+                transition={{
+                  duration: isSmallScreen ? 0.01 : 0.35,
+                  delay: isSmallScreen ? 0 : index * 0.05,
+                }}
+                whileHover={isSmallScreen ? undefined : { y: -6 }}
               >
                 <div className="pointer-events-none absolute inset-x-2 top-2 h-6 rounded-full bg-gradient-to-r from-[#0EA5A4]/10 via-[#38BDF8]/10 to-transparent blur-lg" />
                 <div
@@ -773,9 +816,17 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <motion.section id="projects" className="py-14 md:py-20 px-4" {...reveal}>
+      <motion.section
+        id="projects"
+        className="py-14 md:py-20 px-4"
+        {...stableReveal}
+      >
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Portfólio" title="Projetos" />
+          <SectionHeading
+            eyebrow="Portfólio"
+            title="Projetos"
+            animation={stableReveal}
+          />
 
           <div className="mb-5 md:mb-6 flex items-center justify-between gap-3">
             <p className="text-xs sm:text-sm font-geist-mono text-slate-500 leading-relaxed">
@@ -873,9 +924,17 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <motion.section id="contact" className="py-14 md:py-20 px-4" {...reveal}>
+      <motion.section
+        id="contact"
+        className="py-14 md:py-20 px-4"
+        {...stableReveal}
+      >
         <div className="mx-auto max-w-2xl">
-          <SectionHeading eyebrow="Contato" title="Vamos Conversar" />
+          <SectionHeading
+            eyebrow="Contato"
+            title="Vamos Conversar"
+            animation={stableReveal}
+          />
 
           <motion.form
             className="space-y-5 md:space-y-7 rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 md:p-8 shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
